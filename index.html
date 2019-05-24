@@ -1,0 +1,64 @@
+<!-- Version 1 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Name for the Tab -->
+    <title>Haptica</title>
+
+    <!-- References my CSS -->
+    <link rel="stylesheet" href="indexCSS.css">
+  </head>
+
+  <body id="container">
+    <!-- Displays Version Number for easier testing. Will change to Title when finished -->
+    <div id="title">
+      <!-- Uses the title image made from project one to make a  nice heading for the website -->
+      <img src="images/Haptica.png" alt="Haptica Logo" id="logo">
+      <h1 style="text-align: center;">Index 1</h1>
+    </div>
+    <br>
+
+    <!-- Search Bar HTML -->
+    <div id="coorBox">
+      <!-- Search Box the the user can interact with to enter their destination loaction -->
+      <input id="address" type="textbox" value="Enter Place Here">
+      <!-- Submit button when hit will start the java script code -->
+      <input id="submit" type="button" value="Submit">
+    </div>
+    <br>
+
+    <!-- Holds all of the data. Not needed for final result but good to see for prototype testing -->
+    <div id="coordinates">
+      <p>
+        <!-- Holds data that shows current location coordinates and provide a heading to broadcast what data it is -->
+        Current Location:<br/>
+        <span id="latC">???</span>°, <span id="longC">???</span>°
+        <p>
+        <!-- Holds data that shows destination location coordinates and provide a heading to broadcast what data it is -->
+        Destination:<br/>
+        <span id="latD">???</span>°, <span id="longD">???</span>°
+        <p>
+        <!-- Holds data that shows the difference in degrees between the two locations and provide a heading to broadcast what data it is -->
+        Heading Angle:<br/>
+        <span id="heading">???</span>°
+        <p>
+        <!-- Holds data that shows which way north is (at 0  or 360) and provide a heading to broadcast what data it is -->
+        Degrees from North:<br/>
+        <span id="alpha">???</span>°
+        <p>
+        <!-- Holds data that shows how many degrees from the desired location the user is facing and provide a heading to broadcast what data it is -->
+        Degrees from Destination:<br/>
+        <span id="colourChange">???</span>°
+      </p>
+      </p>
+    </div>
+
+    <!-- Map has to be loaded for use, but is not being displayed by CSS. Legally I have to show the map, however, I asked Julian and he said I didn't have to for this prototype -->
+    <div id="map"></div>
+
+    <!-- Links to the CSS, Javascript, and the Google Map API -->
+    <script src="indexJS.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9NS6UtaCtvTytSXmlS5ArEEr_XSaZ9B8&callback=initMap&libraries=geometry"></script>
+  </body>
+</html>
