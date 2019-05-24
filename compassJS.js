@@ -1,66 +1,19 @@
-// Version 1
+// Version 2
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
-// Map code is based completely on Google Maps Platform Geocoding Service code. Only a few lines of adjustments and additions
-// Couldn't have had this functionalit without it, although I don't realy understand the code that well. Just well enough to
-// Impliment the things I needed. Relevant code marked between two comments which say (// GMP - GS Start) and (// GMP - GS End)
-// https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?fbclid=IwAR3CdZ7HGf8jQHV5rKKkPwOL1HVNK8gpIPBZhMbb5ANB9yst2mW4YFrECdY
-
 // Code also an combination of many helpful tutorials online but no major code taken just used to fix small issues
 
-//Declares the two variables used throughout the script
-var latD;
-var longD;
-
-// GMP - GS Start
-function initMap() {
-  // Initiates a new map. Not displayed on website, but use to gether the data below
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -41.286, lng: 174.776} // My addition. Changed coordinates to focus on Wellington
-  });
-  var geocoder = new google.maps.Geocoder();
-
-  // When the submit button is pressed executes the geocodeAddress. Which gets the desired location data
-  document.getElementById('submit').addEventListener('click', function() {
-    geocodeAddress(geocoder, map); // Function executed and thats the variables of the stated address
-  });
-}
-
-function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('address').value; // Takes the address entered
-  var latLong2 = document.getElementById('latLong2'); // My addition. Holds the container to show the coordinate data for desire location
-
-  // Not sure how this works complete but have left comments where I understand and is needed
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location); // Finds the location
-      var marker = new google.maps.Marker({
-        // Puts a Marker at that result
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-      var lat = marker.getPosition().lat(); // My addition. Gets the latitude of the desire location and holds it in a variable
-      var long = marker.getPosition().lng(); // My addition. Gets the longitude of the desire location and holds it in a variable
-      compass(lat, long); // My addition. Starts the coordinates function and enters the data found from this function
-    } 
-    else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-}
-// GMP - GS End
-
-// Executes when a search has been made. Takes the coordinates of that search and provides them for use in this function
-function compass (latD, longD) {
+function compass () {
   // Variable to change the background colour
   var backColour = document.querySelector('#container');
 
   // Declares variables now so they can be used by everything
   var latC; // Current Latitude variable declaration for use
   var longC; // Current Longitude variable declaration for use
+  var latD = -41.2957003; // FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  var longD = 174.78177999999; // FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   var heading; // Current Heading variable declaration for use
  
   // Check for support for DeviceOrientation event and executes if the is support
