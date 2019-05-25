@@ -1,7 +1,39 @@
-// Version 3
+// Version 4
 
-// Map code is baseds on Google Maps Platform Geocoding Service code with alterations being applied to work for our purposes.
+// Map code is based on Google Maps Platform Geocoding Service code with alterations being applied to work for our purposes.
 // https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?fbclid=IwAR3CdZ7HGf8jQHV5rKKkPwOL1HVNK8gpIPBZhMbb5ANB9yst2mW4YFrECdY
+
+// Speech recognition code completely based on Amit Agarwal tutorial How to Add Speech Recognition to your Website
+// https://www.labnol.org/software/add-speech-recognition-to-website/19989/?fbclid=IwAR3xYJtQ649yuqafzsYjS1IlH8n4n7NafkeHwRIb3kOh7V98bUE1sdRCJSg
+
+//When the user clicks on the image this function will execute
+function startDictation() {
+  // Will only work if the device is able to use speech recognition
+  if (window.hasOwnProperty('webkitSpeechRecognition')) {
+    // Speech "variable" to hold the data
+    var recognition = new webkitSpeechRecognition();
+
+    // Settings for the Speech "Variable"
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    // Executes the microphone, listens, holds and translates the voice patterns into text
+    recognition.start();
+
+    // When the microphone has collected some of the data
+    recognition.onresult = function(e) {
+      document.getElementById('address').value = e.results[0][0].transcript; // Start putting it into the address box
+      recognition.stop(); // Stops recording
+      document.getElementById('coorBox'); // NOT SURE WHAT THIS DOES YET
+    };
+
+    // Just in case the speech recognition doesn't work
+    recognition.onerror = function(e) {
+      recognition.stop(); // Stops recording
+    }
+  }
+}
 
 function initMap() {
   // Initiates the map.
@@ -37,8 +69,8 @@ function geocodeAddress(geocoder, resultsMap) {
       // Sets up a variable to carry the coordinates in the URL to be used by the compass page then opens the new page
       var tHref = 'compass.html' + '#' + lat +';' + long;
       window.location.href = tHref;
-
     } 
+
     // Tells the user why the code didn't execute properly
     else {
       alert('Geocode was not successful for the following reason: ' + status);

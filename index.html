@@ -1,4 +1,4 @@
-<!-- Version 3 -->
+<!-- Version 4 -->
 
 <!DOCTYPE html>
 
@@ -16,18 +16,23 @@
       <!-- Uses the title image made from project one to make a nice heading for the website -->
       <img src="images/Haptica.png" alt="Haptica Logo" id="logo">
       <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-      <h1 style="text-align: center;">Index 3</h1>
+      <h1 style="text-align: center;">Index 4</h1>
       <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
     </div>
     <br>
 
+    <div id="mic">
+      <img onclick="startDictation()" src="images/mic.png"/>
+    </div>
+    <br>
+    
     <!-- Search Bar HTML -->
-    <div id="coorBox">
+    <form id="coorBox" method="get" action="https://www.google.com/search">
       <!-- Search Box the the user can interact with to enter their destination loaction -->
-      <input id="address" type="textbox" value="Enter Place Here">
+      <input id="address" type="text" placeholder="Speak">
       <!-- Submit button when hit will start the java script code -->
       <input id="submit" type="button" value="Submit">
-    </div>
+    </form>
     <br>
 
     <!-- Displays the map implimented by the Google API -->
