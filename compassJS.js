@@ -1,4 +1,4 @@
-// Version 2
+// Version 3
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -12,9 +12,13 @@ function compass () {
   // Declares variables now so they can be used by everything
   var latC; // Current Latitude variable declaration for use
   var longC; // Current Longitude variable declaration for use
-  var latD = -41.2957003; // FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  var longD = 174.78177999999; // FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   var heading; // Current Heading variable declaration for use
+
+
+  // Takes the variables transfered over from the index page that were searched for use and calculations
+  var tHash = window.location.hash.split('#').pop();
+  var latD = tHash.split(';')[0]; // Destination Latitude
+  var longD = tHash.split(';')[1]; // Destination Longitude
  
   // Check for support for DeviceOrientation event and executes if the is support
   if(window.DeviceOrientationEvent) {
