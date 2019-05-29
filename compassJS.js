@@ -1,4 +1,4 @@
-// Version 4
+// Version 5
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -27,17 +27,16 @@ function compass () {
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var accuracy; // Variable holder for alpha accuracy purely for iPhone use, can't be calculated yet
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
+      var direction;
 
-      var colourChange;
-      var colourChanger;
+      var dArrow= document.getElementById('direct');
+      var nArrow = document.getElementById('north');
 
       // Check for iOS properties
       if(event.webkitCompassHeading) {
-        alpha = event.webkitCompassHeading; // Calculates where North is for iPhone. Not perfect
-        accuracy = event.webkitCompassAccuracy; // Calculates how inaccurate the variable above is
-
-        // Tells the if statement that the device isan iPhone. Thus need to display Accuracy data
-        type = 1;
+        alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
+        //Rotation is reversed for iOS
+        compass.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
       }
 
       // Non iOS. I don't completely understand this bit. But I have tested and it works completely
@@ -45,14 +44,21 @@ function compass () {
         alpha = event.alpha; // Sets alpha for Andriod
         webkitAlpha = alpha; // To be used for the chrome
 
-        // Tells the if statement that the device is not an iPhone. Thus should have more Accurate data
-        type = 0;
-
         // For chrome apps on Andriod I believe as they use a slightly different system. The calculate is somewhat arbitrary but will work
         if(!window.chrome) {
-          webkitAlpha = alpha + 180; // Don't know how this is working, but changing it fixes dicrepensies in the Andriod App
+          webkitAlpha = alpha - 270; // Don't know how this is working, but changing it fixes dicrepensies in the Andriod App
         }
       }
+
+
+
+
+
+
+
+
+
+
 
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
@@ -66,16 +72,14 @@ function compass () {
         heading = google.maps.geometry.spherical.computeHeading(pointA, pointB); 
       });
 
-      // Arbitrary fix to alpha not pointing at true north. Only works for iPhone (chrome) and kind of ruins the data for any other devices
-      alpha = alpha + 25;
 
-      // Small change to account for the arbitrary solution above to keep north within 0 - 360 degrees
-      if (alpha> 360) {
-        alpha = alpha - 360;
-      }
-      else if (alpha < 0) {
-        alpha = alpha + 360;
-      }
+
+
+
+
+
+
+
 
       // Sets the angle 0/360 point in the direction of the location. At 0/360 will be pointing at the location you want to go
       var angle = alpha - heading;
@@ -91,32 +95,38 @@ function compass () {
       // Controls variable which acts like the angle variable but instead between the value of 0 and 180 and describes how big
       // the difference is between the alpha and heading angle. Is then used to apply the colouring
       if (angle < 180) {
-        colourChange = angle;
+        direction = angle;
       }
       else {
-        colourChange = 360 - angle;
+        direction = (360 - angle) * -1;
       }
 
-      // Variable that takes the colourChange variable and applies a math equation to it to be used to fade the red to establish the wrong direction
-      colourChanger = 200 - (colourChange*0.6);
 
-      // If the phone is facing in the right direction (5 degree leeway) the site will be green. Else it will be a red that gets darker depending 
-      // on how far away from the location you are facing with 180 degrees being nearly greyish, which means you are facing completel in the wrong direction
-      if (colourChange <= 5) {
-        backColour.style.backgroundColor = 'rgb(66, 244, 101)';
-      }
-      else if (colourChange > 5) {
-        backColour.style.backgroundColor = 'rgb(' + colourChanger + ', 60 , 60)';
-      }
 
-      // Prints all the different values being used
+
+
+      //Rotates Arrows
+      nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
+      nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
+      //Rotation is reversed for FF
+      nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
+
+
+
+
+
+
+      dArrow.style.transform = 'rotate(' + direction + 'deg)';
+
+      // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       document.getElementById('latC').innerHTML = latC;
       document.getElementById('longC').innerHTML = longC;
       document.getElementById('latD').innerHTML = latD;
       document.getElementById('longD').innerHTML = longD;
       document.getElementById('heading').innerHTML = heading;
       document.getElementById('alpha').innerHTML = alpha;
-      document.getElementById('colourChange').innerHTML = colourChange;
+      document.getElementById('direction').innerHTML = direction;
+      // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }, false); // This could also be what loops the code. I am not fully sure
   }
