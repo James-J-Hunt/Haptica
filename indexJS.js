@@ -1,22 +1,10 @@
-// Version 6
+// Version 7
 
 // Map code is based on Google Maps Platform Geocoding Service code with alterations being applied to work for our purposes.
 // https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?fbclid=IwAR3CdZ7HGf8jQHV5rKKkPwOL1HVNK8gpIPBZhMbb5ANB9yst2mW4YFrECdY
 
 // Speech recognition code completely based on Amit Agarwal tutorial How to Add Speech Recognition to your Website
 // https://www.labnol.org/software/add-speech-recognition-to-website/19989/?fbclid=IwAR3xYJtQ649yuqafzsYjS1IlH8n4n7NafkeHwRIb3kOh7V98bUE1sdRCJSg
-
-
-
-// There are issues to be solved. Not working on my phone.
-
-
-
-
-
-
-
-
 
 //When the user clicks on the image this function will execute
 function startDictation() {

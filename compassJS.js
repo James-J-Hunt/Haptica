@@ -1,4 +1,4 @@
-// Version 6
+// Version 7
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -6,14 +6,10 @@
 // Code also an combination of many helpful tutorials online but no major code taken just used to fix small issues
 
 function compass () {
-  // Variable to change the background colour
-  var backColour = document.querySelector('#container');
-
   // Declares variables now so they can be used by everything
   var latC; // Current Latitude variable declaration for use
   var longC; // Current Longitude variable declaration for use
   var heading; // Current Heading variable declaration for use
-
 
   // Takes the variables transfered over from the index page that were searched for use and calculations
   var tHash = window.location.hash.split('#').pop();
@@ -36,17 +32,20 @@ function compass () {
       if(event.webkitCompassHeading) {
         alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
         //Rotation is reversed for iOS
-        compass.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
+        nArrow.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
+        document.getElementById('phone').innerHTML = 'iPhone';
       }
 
       // Non iOS.
       else {
         alpha = event.alpha; // Sets alpha for Andriod
         webkitAlpha = alpha; // To be used for the chrome
+        document.getElementById('phone').innerHTML = 'Andriod';
 
         //Assume Android stock (this is crude, will reccomend change to chrome) and apply offset
         if(!window.chrome) {
           webkitAlpha = alpha - 270;
+          document.getElementById('phone').innerHTML = 'Andriod - Non Chrome';
         }
       }
 
@@ -62,51 +61,30 @@ function compass () {
         heading = google.maps.geometry.spherical.computeHeading(pointA, pointB); 
       });
 
-
-
-
-
-
-
-
-
+      //Calculations to do with the data to get information needed
 
       // Sets the angle 0/360 point in the direction of the location. At 0/360 will be pointing at the location you want to go
-      var angle = alpha - heading;
+      var angle = alpha + heading;
 
       // Keeps angle within 0 - 360 range again
-      if (angle >= 360) {
-        angle = angle - 360;
-      }
-      else if (angle <= 0) {
-        angle = angle + 360;
-      }
+      if (angle >= 360) {angle = angle - 360;}
+      else if (angle <= 0) {angle = angle + 360;}
 
       // Controls variable which acts like the angle variable but instead between the value of 0 and 180 and describes how big
       // the difference is between the alpha and heading angle. Is then used to apply the colouring
-      if (angle < 180) {
-        direction = angle * -1;
-      }
-      else {
-        direction = 360 - angle;
-      }
+      if (angle < 180) {direction = angle;}
+      else {direction = (360 - angle) * -1;}
 
+      //Displaying of the data
 
-
-
-
-      //Rotates Arrows
       nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
       nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
       //Rotation is reversed for FF
       nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
 
-
-
-
-
-
       dArrow.style.transform = 'rotate(' + direction + 'deg)';
+      dArrow.style.WebkitTransform = 'rotate(' + direction + 'deg)';
+      dArrow.style.MozTransform = 'rotate(' + direction + 'deg)';
 
       // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       document.getElementById('latC').innerHTML = latC;
