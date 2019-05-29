@@ -1,4 +1,4 @@
-// Version 5
+// Version 6
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -27,7 +27,7 @@ function compass () {
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var accuracy; // Variable holder for alpha accuracy purely for iPhone use, can't be calculated yet
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
-      var direction;
+      var direction; // Variable holder to show the 
 
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
@@ -39,26 +39,16 @@ function compass () {
         compass.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
       }
 
-      // Non iOS. I don't completely understand this bit. But I have tested and it works completely
+      // Non iOS.
       else {
         alpha = event.alpha; // Sets alpha for Andriod
         webkitAlpha = alpha; // To be used for the chrome
 
-        // For chrome apps on Andriod I believe as they use a slightly different system. The calculate is somewhat arbitrary but will work
+        //Assume Android stock (this is crude, will reccomend change to chrome) and apply offset
         if(!window.chrome) {
-          webkitAlpha = alpha - 270; // Don't know how this is working, but changing it fixes dicrepensies in the Andriod App
+          webkitAlpha = alpha - 270;
         }
       }
-
-
-
-
-
-
-
-
-
-
 
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
@@ -95,10 +85,10 @@ function compass () {
       // Controls variable which acts like the angle variable but instead between the value of 0 and 180 and describes how big
       // the difference is between the alpha and heading angle. Is then used to apply the colouring
       if (angle < 180) {
-        direction = angle;
+        direction = angle * -1;
       }
       else {
-        direction = (360 - angle) * -1;
+        direction = 360 - angle;
       }
 
 
