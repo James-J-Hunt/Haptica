@@ -1,4 +1,4 @@
-// Version 8
+// Version 9
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -63,7 +63,7 @@ function compass () {
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
         enableHighAccuracy: true;
-        timeout:6000;
+        timeout: 1000;
         maximumAge: 0;
 
         latC = position.coords.latitude; // Finds the Current Latitude
