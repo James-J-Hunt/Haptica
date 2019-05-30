@@ -1,4 +1,4 @@
-// Version 14
+// Version 17
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -96,7 +96,7 @@ function compass() {
       latA = latC - latD;
       longA = longC - longD;
 
-      if (latA <= 0.0001 && latA >= -0.0001 && longA <= 0.0001 && longA >= -0.0001) {
+      if (latA <= 0.0003 && latA >= -0.0003 && longA <= 0.0003 && longA >= -0.0003) {
         vibrate();
       }
       else {
