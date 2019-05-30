@@ -1,4 +1,4 @@
-<!-- Version 13 -->
+<!-- Version 14 -->
 
 <!DOCTYPE html>
 
@@ -11,13 +11,17 @@
     <link rel="stylesheet" href="compassCSS.css">
   </head>
 
-  <body id="container" onload="compass()">
+  <body id="container">
     <div id="title">
       <!-- Uses the title image made from project one to make a  nice heading for the website -->
       <img src="images/Haptica.png" alt="Haptica Logo" id="logo">
       <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-      <h1 style="text-align: center;">Compass 13</h1>
+      <h1 style="text-align: center;">Compass 14</h1>
       <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    </div>
+    
+    <div id="button">
+      <button type="button" id="startButton" onclick="compass()">START</button><br>
     </div>
 
     <div id="compassImages">
@@ -63,10 +67,6 @@
         <!-- Holds data that shows what phone is being used -->
         Device Type:<br/>
         <span id="phone">???</span>
-        <p>
-        Arrive:<br/>
-        <button type="button" id="arrive" onclick="vibrate()">You have Arrived</button><br>
-        <span id="arriveText">???</span>
       </p>
       </p>
       <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->

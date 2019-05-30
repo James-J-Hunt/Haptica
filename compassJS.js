@@ -1,4 +1,4 @@
-// Version 13
+// Version 14
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -11,8 +11,11 @@
 // diverge              4                   4
 // 5th decimal place
 
-
 function compass() {
+  document.getElementById("compassImages").style.display = 'block';
+  document.getElementById("coordinates").style.display = 'block';
+  document.getElementById("button").style.display = 'none';
+
   // Declares variables now so they can be used by everything
   var latC; // Current Latitude variable declaration for use
   var longC; // Current Longitude variable declaration for use
@@ -23,13 +26,12 @@ function compass() {
   var latD = tHash.split(';')[0]; // Destination Latitude
   var longD = tHash.split(';')[1]; // Destination Longitude
  
-  // Check for support for DeviceOrientation event and executes if the is support
+  // Check for support for DeviceOrientationAbsolute event and executes if the is support
   if(window.DeviceOrientationEvent) {
-    // I think this is a continously executing function that is the core of the system. Based off of the Link at top and don't fully understand it
-    window.addEventListener('deviceorientationabsolute', function(event) {
+    window.addEventListener('deviceorientation', function(event) { // absolute
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
-      var direction; // Variable holder to show the 
+      var direction; 
 
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
@@ -94,6 +96,15 @@ function compass() {
       latA = latC - latD;
       longA = longC - longD;
 
+      if (latA <= 0.0001 && latA >= -0.0001 && longA <= 0.0001 && longA >= -0.0001) {
+        vibrate();
+      }
+      else {
+        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        document.getElementById("container").style.backgroundColor = 'rgb(180, 180, 180)';
+        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      }
+
       // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       document.getElementById('latC').innerHTML = latC;
       document.getElementById('longC').innerHTML = longC;
@@ -112,5 +123,7 @@ function compass() {
 
 function vibrate(duration, interval) {
   navigator.vibrate([3000, 2000, 1000]);
-  document.getElementById('arriveText').innerHTML = 'Worked';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  document.getElementById("container").style.backgroundColor = 'rgb(66, 244, 101)';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
