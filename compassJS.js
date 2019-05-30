@@ -1,4 +1,4 @@
-// Version 10
+// Version 11
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -32,33 +32,13 @@ function compass() {
     // I think this is a continously executing function that is the core of the system. Based off of the Link at top and don't fully understand it
     window.addEventListener('deviceorientation', function(event) {
       var alpha; // Variable holder for alpha as it has different applications over different devises
-      var accuracy; // Variable holder for alpha accuracy purely for iPhone use, can't be calculated yet
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
       var direction; // Variable holder to show the 
 
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
 
-      // Check for iOS properties
-      if(event.webkitCompassHeading) {
-        alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
-        //Rotation is reversed for iOS
-        nArrow.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
-        document.getElementById('phone').innerHTML = 'iPhone';
-      }
-
-      // Non iOS.
-      else {
-        alpha = event.alpha; // Sets alpha for Andriod
-        webkitAlpha = alpha; // To be used for the chrome
-        document.getElementById('phone').innerHTML = 'Andriod';
-
-        //Assume Android stock (this is crude, will reccomend change to chrome) and apply offset
-        if(!window.chrome) {
-          webkitAlpha = alpha - 270;
-          document.getElementById('phone').innerHTML = 'Andriod - Non Chrome';
-        }
-      }
+      alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
 
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
@@ -88,12 +68,8 @@ function compass() {
 
       //Displaying of the data as a compass
       nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
-      nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
-      nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
 
       dArrow.style.transform = 'rotate(' + direction + 'deg)';
-      dArrow.style.WebkitTransform = 'rotate(' + direction + 'deg)';
-      dArrow.style.MozTransform = 'rotate(' + direction + 'deg)';
 
       // Calculates the prixoimity to the location
       latA = latC - latD;
