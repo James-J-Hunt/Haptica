@@ -1,4 +1,4 @@
-// Version 9
+// Version 10
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -16,7 +16,7 @@
 // 5th decimal place
 
 
-function compass () {
+function compass() {
   // Declares variables now so they can be used by everything
   var latC; // Current Latitude variable declaration for use
   var longC; // Current Longitude variable declaration for use
@@ -62,10 +62,6 @@ function compass () {
 
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
-        enableHighAccuracy: true;
-        timeout: 1000;
-        maximumAge: 0;
-
         latC = position.coords.latitude; // Finds the Current Latitude
         longC = position.coords.longitude; // Finds the Current Longitude
 
@@ -117,4 +113,9 @@ function compass () {
 
     }, false); // This could also be what loops the code. I am not fully sure
   }
+}
+
+function vibrate(duration, interval) {
+  navigator.vibrate([3000, 2000, 1000]);
+  document.getElementById('arriveText').innerHTML = 'Work';
 }
