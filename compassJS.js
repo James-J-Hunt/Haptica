@@ -1,13 +1,9 @@
-// Version 11
+// Version 13
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
 // Code also an combination of many helpful tutorials online but no major code taken just used to fix small issues
-
-// Testing and Works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// - Galaxy S9
-
 
 // c1 location = -41.29632743891323, 174.7798232221797
 // c2 location = -41.29668717414107, 174.78073323191197
@@ -30,7 +26,7 @@ function compass() {
   // Check for support for DeviceOrientation event and executes if the is support
   if(window.DeviceOrientationEvent) {
     // I think this is a continously executing function that is the core of the system. Based off of the Link at top and don't fully understand it
-    window.addEventListener('deviceorientation', function(event) {
+    window.addEventListener('deviceorientationabsolute', function(event) {
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
       var direction; // Variable holder to show the 
@@ -38,7 +34,26 @@ function compass() {
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
 
-      alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
+      // Check for iOS properties
+      if(event.webkitCompassHeading) {
+        alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
+        //Rotation is reversed for iOS
+        nArrow.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
+        document.getElementById('phone').innerHTML = 'iPhone';
+      }
+
+      // Non iOS.
+      else {
+        alpha = event.alpha; // Sets alpha for Andriod
+        webkitAlpha = alpha; // To be used for the chrome
+        document.getElementById('phone').innerHTML = 'Andriod';
+
+        //Assume Android stock (this is crude, will reccomend change to chrome) and apply offset
+        if(!window.chrome) {
+          webkitAlpha = alpha - 270;
+          document.getElementById('phone').innerHTML = 'Andriod - Non Chrome';
+        }
+      }
 
       // Watches the users current Pos and returns the values to be used by the code below
       navigator.geolocation.watchPosition(function(position) {
@@ -68,8 +83,12 @@ function compass() {
 
       //Displaying of the data as a compass
       nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
+      nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
+      nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
 
       dArrow.style.transform = 'rotate(' + direction + 'deg)';
+      dArrow.style.WebkitTransform = 'rotate(' + direction + 'deg)';
+      dArrow.style.MozTransform = 'rotate(' + direction + 'deg)';
 
       // Calculates the prixoimity to the location
       latA = latC - latD;
@@ -93,5 +112,5 @@ function compass() {
 
 function vibrate(duration, interval) {
   navigator.vibrate([3000, 2000, 1000]);
-  document.getElementById('arriveText').innerHTML = 'Work';
+  document.getElementById('arriveText').innerHTML = 'Worked';
 }
