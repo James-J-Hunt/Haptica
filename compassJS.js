@@ -1,4 +1,4 @@
-// Version 17
+// Version 18
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -28,7 +28,7 @@ function compass() {
  
   // Check for support for DeviceOrientationAbsolute event and executes if the is support
   if(window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', function(event) { // absolute
+    window.addEventListener('deviceorientationabsolute', function(event) { // absolute
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
       var direction; 
@@ -96,7 +96,7 @@ function compass() {
       latA = latC - latD;
       longA = longC - longD;
 
-      if (latA <= 0.0003 && latA >= -0.0003 && longA <= 0.0003 && longA >= -0.0003) {
+      if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
         vibrate();
       }
       else {
