@@ -1,4 +1,4 @@
-// Version 18
+// Version 19
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -49,12 +49,6 @@ function compass() {
         alpha = event.alpha; // Sets alpha for Andriod
         webkitAlpha = alpha; // To be used for the chrome
         document.getElementById('phone').innerHTML = 'Andriod';
-
-        //Assume Android stock (this is crude, will reccomend change to chrome) and apply offset
-        if(!window.chrome) {
-          webkitAlpha = alpha - 270;
-          document.getElementById('phone').innerHTML = 'Andriod - Non Chrome';
-        }
       }
 
       // Watches the users current Pos and returns the values to be used by the code below
