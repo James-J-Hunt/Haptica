@@ -1,4 +1,4 @@
-// Version 19
+// Version 20
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -90,13 +90,24 @@ function compass() {
       latA = latC - latD;
       longA = longC - longD;
 
-      if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
-        vibrate();
+      // if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
+      //   vibrate();
+      // }
+
+      if (direction <= 5 && direction >= -5){
+        vibrate1();
+      }
+      else if (direction <= 45 && direction >= -45){
+        vibrate2();
+      }
+      else if (direction <= 90 && direction >= -90){
+        vibrate3();
+      }
+      else if (direction <= 135 && direction >= -135){
+        vibrate4();
       }
       else {
-        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        document.getElementById("container").style.backgroundColor = 'rgb(180, 180, 180)';
-        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        vibrate5();
       }
 
       // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -115,9 +126,33 @@ function compass() {
   }
 }
 
-function vibrate(duration, interval) {
-  navigator.vibrate([3000, 2000, 1000]);
+function vibrate1(duration, interval) {
+  navigator.vibrate([300, 300]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(66, 244, 101)';
+  document.getElementById("container").style.backgroundColor = 'rgb(120, 120, 120)';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+function vibrate2(duration, interval) {
+  navigator.vibrate([600, 600]);
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+function vibrate3(duration, interval) {
+  navigator.vibrate([900, 900]);
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  document.getElementById("container").style.backgroundColor = 'rgb(160, 160, 160)';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+function vibrate4(duration, interval) {
+  navigator.vibrate([1200, 1200]);
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  document.getElementById("container").style.backgroundColor = 'rgb(180, 180, 180)';
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+function vibrate5(duration, interval) {
+  navigator.vibrate([1500, 1500]);
+  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  document.getElementById("container").style.backgroundColor = 'rgb(200, 200, 200)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
