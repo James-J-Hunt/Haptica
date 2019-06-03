@@ -1,4 +1,4 @@
-// Version 21
+// Version 22
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -24,10 +24,10 @@ function compass() {
  
   // Check for support for DeviceOrientationAbsolute event and executes if the is support
   if(window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientationabsolute', function(event) { // absolute
+    window.addEventListener('deviceorientation', function(event) { // absolute
       var alpha; // Variable holder for alpha as it has different applications over different devises
       var northDegree; // Variable holder for how many degrees you are from North, can't be calculated yet
-      var direction; 
+      var direction; // Variable to hold the direction alpha data
 
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
@@ -87,12 +87,17 @@ function compass() {
       longA = longC - longD;
 
       // If close to the location then execute the close vibration function
-      if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
+      if (latA <= 0.002 && latA >= -0.002 && longA <= 0.002 && longA >= -0.002) {
         vibrateClose();
       }
       // else if the user is pointing the phone in the right direction then execute the proximity vibration function
-      else if (direction <= 5 && direction >= -5){
+      else if (direction <= 10 && direction >= -10){
         vibrateProximity();
+      }
+      else {
+        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        document.getElementById("container").style.backgroundColor = 'rgb(255, 255, 255)';
+        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
 
       // Displays the data gathered for testing purposes
@@ -111,13 +116,13 @@ function compass() {
 }
 
 function vibrateClose(duration, interval) {
-  navigator.vibrate([500]);
+  navigator.vibrate([1000, 0]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(120, 120, 120)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 function vibrateProximity(duration, interval) {
-  navigator.vibrate([100, 0]);
+  navigator.vibrate([200, 200]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
