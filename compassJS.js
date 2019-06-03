@@ -1,17 +1,13 @@
-// Version 20
+// Version 21
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
 // Code also an combination of many helpful tutorials online but no major code taken just used to fix small issues
 
-// c1 location = -41.29632743891323, 174.7798232221797
-// c2 location = -41.29668717414107, 174.78073323191197
-// d location  = -41.2967531,        174.7806263
-// diverge              4                   4
-// 5th decimal place
-
 function compass() {
+  // When the button is hit switch the display properties to diplay the compass
+  // Important because without user interaction the vibration API cannot be used
   document.getElementById("compassImages").style.display = 'block';
   document.getElementById("coordinates").style.display = 'block';
   document.getElementById("button").style.display = 'none';
@@ -36,7 +32,7 @@ function compass() {
       var dArrow= document.getElementById('direct');
       var nArrow = document.getElementById('north');
 
-      // Check for iOS properties
+      // Check for iOS properties. Not neccesary but kept in for testing purposes
       if(event.webkitCompassHeading) {
         alpha = event.webkitCompassHeading; // Calculates where North is for iPhone.
         //Rotation is reversed for iOS
@@ -44,7 +40,7 @@ function compass() {
         document.getElementById('phone').innerHTML = 'iPhone';
       }
 
-      // Non iOS.
+      // Andriod and other devices
       else {
         alpha = event.alpha; // Sets alpha for Andriod
         webkitAlpha = alpha; // To be used for the chrome
@@ -77,7 +73,7 @@ function compass() {
       if (angle < 180) {direction = angle;}
       else {direction = (360 - angle) * -1;}
 
-      //Displaying of the data as a compass
+      // For different devices turns the compass arrows
       nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
       nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
       nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
@@ -90,27 +86,16 @@ function compass() {
       latA = latC - latD;
       longA = longC - longD;
 
-      // if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
-      //   vibrate();
-      // }
-
-      if (direction <= 5 && direction >= -5){
-        vibrate1();
+      // If close to the location then execute the close vibration function
+      if (latA <= 0.001 && latA >= -0.001 && longA <= 0.001 && longA >= -0.001) {
+        vibrateClose();
       }
-      else if (direction <= 45 && direction >= -45){
-        vibrate2();
-      }
-      else if (direction <= 90 && direction >= -90){
-        vibrate3();
-      }
-      else if (direction <= 135 && direction >= -135){
-        vibrate4();
-      }
-      else {
-        vibrate5();
+      // else if the user is pointing the phone in the right direction then execute the proximity vibration function
+      else if (direction <= 5 && direction >= -5){
+        vibrateProximity();
       }
 
-      // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // Displays the data gathered for testing purposes
       document.getElementById('latC').innerHTML = latC;
       document.getElementById('longC').innerHTML = longC;
       document.getElementById('latD').innerHTML = latD;
@@ -120,39 +105,20 @@ function compass() {
       document.getElementById('direction').innerHTML = direction;
       document.getElementById('latA').innerHTML = latA;
       document.getElementById('longA').innerHTML = longA;
-      // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }, false); // This could also be what loops the code. I am not fully sure
   }
 }
 
-function vibrate1(duration, interval) {
-  navigator.vibrate([300, 300]);
+function vibrateClose(duration, interval) {
+  navigator.vibrate([500]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(120, 120, 120)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
-function vibrate2(duration, interval) {
-  navigator.vibrate([600, 600]);
+function vibrateProximity(duration, interval) {
+  navigator.vibrate([100, 0]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-function vibrate3(duration, interval) {
-  navigator.vibrate([900, 900]);
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(160, 160, 160)';
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-function vibrate4(duration, interval) {
-  navigator.vibrate([1200, 1200]);
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(180, 180, 180)';
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-function vibrate5(duration, interval) {
-  navigator.vibrate([1500, 1500]);
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(200, 200, 200)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

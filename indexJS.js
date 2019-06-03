@@ -1,4 +1,4 @@
-// Version 20
+// Version 21
 
 // Map code is based on Google Maps Platform Geocoding Service code with alterations being applied to work for our purposes.
 // https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?fbclid=IwAR3CdZ7HGf8jQHV5rKKkPwOL1HVNK8gpIPBZhMbb5ANB9yst2mW4YFrECdY
@@ -66,7 +66,7 @@ function geocodeAddress(geocoder, resultsMap) {
       var lat = marker.getPosition().lat(); // Gets the latitude of the desire location and holds it in a variable
       var long = marker.getPosition().lng(); // Gets the longitude of the desire location and holds it in a variable
 
-      // Sets up a variable to carry the coordinates in the URL to be used by the compass page then opens the new page
+      // Sets up a variable to carry the coordinates in the URL to be used by the compass page then opens the compass page
       var tHref = 'compass.html' + '#' + lat +';' + long;
       window.location.href = tHref;
     } 
