@@ -1,9 +1,11 @@
-// Version 23
+// Version 24
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
 // Code also an combination of many helpful tutorials online but no major code taken just used to fix small issues
+
+var audioVar = 0;
 
 function compass() {
   // When the button is hit switch the display properties to diplay the compass
@@ -88,7 +90,8 @@ function compass() {
 
       // If close to the location then execute the close vibration function
       if (latA <= 0.002 && latA >= -0.002 && longA <= 0.002 && longA >= -0.002) {
-        vibrateClose();
+        vibrateClose(audioVar);
+        audioVar = 1;
       }
       // else if the user is pointing the phone in the right direction then execute the proximity vibration function
       else if (direction <= 10 && direction >= -10){
@@ -115,14 +118,17 @@ function compass() {
   }
 }
 
-function vibrateClose(duration, interval) {
-  navigator.vibrate([1000, 1000]);
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(120, 120, 120)';
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Plays when the user is close to their location
+function vibrateClose(sound) {
+  if (sound == 0){ // If statement so it only plays once
+    var audio = new Audio('audio/DestSound.mp3'); // Gets the audio file
+    audio.play(); // Plays Audio
+  }
 }
+
+// Vibrates when pointing the right direction
 function vibrateProximity(duration, interval) {
-  navigator.vibrate([200, 3000]);
+  navigator.vibrate([400, 400]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
