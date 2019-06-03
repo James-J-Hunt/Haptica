@@ -1,4 +1,4 @@
-// Version 22
+// Version 23
 
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
@@ -116,13 +116,13 @@ function compass() {
 }
 
 function vibrateClose(duration, interval) {
-  navigator.vibrate([1000, 0]);
+  navigator.vibrate([1000, 1000]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(120, 120, 120)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 function vibrateProximity(duration, interval) {
-  navigator.vibrate([200, 200]);
+  navigator.vibrate([200, 3000]);
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
   // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
