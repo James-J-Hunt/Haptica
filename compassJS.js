@@ -1,5 +1,3 @@
-// Version 24
-
 // Compass Code and alpha data etc inspired and adapted from HTML5 for the Mobile Web: Device Orientation Events
 // https://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
@@ -11,7 +9,7 @@ function compass() {
   // When the button is hit switch the display properties to diplay the compass
   // Important because without user interaction the vibration API cannot be used
   document.getElementById("compassImages").style.display = 'block';
-  document.getElementById("coordinates").style.display = 'block';
+  document.getElementById("coordinates").style.display = 'none';
   document.getElementById("button").style.display = 'none';
 
   // Declares variables now so they can be used by everything
@@ -75,7 +73,7 @@ function compass() {
       if (angle < 180) {direction = angle;}
       else {direction = (360 - angle) * -1;}
 
-      // For different devices turns the compass arrows
+      // For different devices turns the compass arrow and base compass
       nArrow.style.Transform = 'rotate(' + alpha + 'deg)';
       nArrow.style.WebkitTransform = 'rotate('+ webkitAlpha + 'deg)';
       nArrow.style.MozTransform = 'rotate(-' + alpha + 'deg)'; 
@@ -89,18 +87,13 @@ function compass() {
       longA = longC - longD;
 
       // If close to the location then execute the close vibration function
-      if (latA <= 0.002 && latA >= -0.002 && longA <= 0.002 && longA >= -0.002) {
+      if (latA <= 0.0005 && latA >= -0.0005 && longA <= 0.0005 && longA >= -0.0005) {
         vibrateClose(audioVar);
         audioVar = 1;
       }
       // else if the user is pointing the phone in the right direction then execute the proximity vibration function
       else if (direction <= 10 && direction >= -10){
         vibrateProximity();
-      }
-      else {
-        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        document.getElementById("container").style.backgroundColor = 'rgb(255, 255, 255)';
-        // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
 
       // Displays the data gathered for testing purposes
@@ -128,8 +121,5 @@ function vibrateClose(sound) {
 
 // Vibrates when pointing the right direction
 function vibrateProximity(duration, interval) {
-  navigator.vibrate([400, 400]);
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  document.getElementById("container").style.backgroundColor = 'rgb(140, 140, 140)';
-  // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  navigator.vibrate([400, 400]); // Vibrates the phone, not exactly a nice vibrate but given the parameters of the code its the best we can do.
 }

@@ -1,5 +1,3 @@
-<!-- Version 24 -->
-
 <!DOCTYPE html>
 
 <html>
@@ -11,32 +9,42 @@
     <link rel="stylesheet" href="compassCSS.css">
   </head>
 
+  <!-- Container for all the divs -->
   <body id="container">
     <div id="title">
-      <!-- Uses the title image made from project one to make a  nice heading for the website -->
-      <img src="images/Haptica.png" alt="Haptica Logo" id="logo">
-      <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-      <h1 style="text-align: center;">Compass 24</h1>
-      <!-- FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+      <!-- Uses the title image for the website -->
+      <img src="images/Haptica.png" alt="Title of the Website." id="logo">
     </div>
 
+    <!-- A button to press to allow the Website to use the Vibration API-->
     <div id="button">
-      <button type="button" id="startButton" onclick="compass()">START</button><br>
+      <img id="startButton" alt="Click this button to start the Compass." onclick="compass()" src="images/startbutton.png">
+      <!-- Back button to take you to the previous site -->
+      <a href="index.html">
+        <img id="backButton" alt="Click this button to go back to the previous page." src="images/backbutton.png">
+      </a>
     </div>
 
+    <!-- Divs to hold the compass images to be rotated accordingly -->
     <div id="compassImages">
-      <div id="base">
-        <img src="images/compass.png" alt="Compass Base" id="base">
-      </div>
-      <div id="dArrow">
-        <img src="images/dArrow.png" alt="Directional Arrow" id="direct">
-      </div>
+      <!-- The backbround compass which points North -->
       <div id="nArrow">
-        <img src="images/nArrow.png" alt="North Arrow" id="north">
+        <img src="images/nArrow.png" alt="Compass Base. No engagement needed." id="north">
+      </div>
+      <!-- Arrow for the compass which points towards your desired location -->
+      <div id="dArrow">
+        <img src="images/dArrow.png" alt="Compass Arrow. No engagement needed." id="direct">
+      </div>
+      <!-- Back button to take you to the previous site -->
+      <div id="back button">
+        <a href="index.html">
+        <img src="images/backbutton.png" alt="Click this button to go back to the previous page." id="backButton2">
+      </a>
       </div>
     </div>
     <br>
 
+    <!-- Data not displayed but kept for testing purposes! -->
     <div id="coordinates">
       <p>
         <!-- Holds data that shows current location coordinates and provide a heading to broadcast what data it is -->
@@ -68,7 +76,6 @@
         <span id="phone">???</span>
       </p>
     </div>
-
     <!-- Links to the CSS, Javascript, and the Google Map API -->
     <script src="compassJS.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9NS6UtaCtvTytSXmlS5ArEEr_XSaZ9B8&libraries=geometry"></script>
